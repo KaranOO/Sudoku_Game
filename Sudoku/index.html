@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+
+        <meta charset="UTF-8"/>
+        <title>GAME-Sudoku</title>
+        <link rel="icon" href="favicon.png" type="image/png">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="description" content="Sudoku Game." />
+
+        <style>
+            #mydiv{
+                    display: grid;
+                    grid-template-columns: repeat(9, 11%);
+                    margin-left: 30%; 
+                    margin-right: 30%;
+                    margin-top: 1%; 
+                   }
+
+                .cola{
+                    float: left;
+                    height: 5%;
+                    width: 5%;
+                    padding: 15px;
+                    margin-top: 3%;
+                }
+
+                .colb:hover{
+                    cursor: auto;
+                    padding: 2px;
+                    border: solid 2px rgba(255, 255, 255, 0.186);
+                    background-color: rgba(255, 248, 248, 0.255);
+                    transition: 0.2s;
+                    }
+
+                body{
+                   background-color: rgba(22, 21, 21, 0.986);
+                    /*background-image: url('bg.jpg');
+                    background-repeat: no-repeat;
+                    background-position: center;
+                    background-size: 120%;*/
+                }
+
+                input{
+                    height: 44px;
+                    background-color:rgba(251, 253, 137, 0.925);
+                    border: 1px solid rgb(255, 102, 0);
+                    border-radius: 1px;
+                    font-size: 130%;
+                    text-align: center;
+                    float: center;
+                }
+
+                #head1{
+                        text-align: center;
+                        font-size: 35px;
+                        font-weight: 800;
+                        color: red;
+                        font-family: Arial, Helvetica, sans-serif;
+                        }
+
+                #head2{
+                        text-align: center;
+                        font-size: 35px;
+                        font-weight: 800;
+                        color: blue;
+                        font-family: Arial, Helvetica, sans-serif;
+                    }
+        </style>
+    </head>
+
+
+    <body onbeforeunload="return myFunction()" > 
+        <div style="text-align: center; background-color:rgba(150, 245, 163, 0.925);"><span id="head1">SUD</span><span id="head2">OKU</span></div>
+        
+        <hr>
+
+        <div style="background-color: rgba(255, 255, 255, 0.322);">
+        <h1 style="color: ivory; text-align: center;" >Sudoku Rule:</h1>
+        <p style="color:white ; text-align: center;" >Each of the nine blocks has to contain the numbers 1 to 9 in its squares.
+            <br>
+         Each number can only appear once column, row or 3x3 box. Every sudoku puzzle has only one correct solution.
+        </p>
+        </div>
+        <br><br>
+        <span style="margin-left: 30%;  background-color: rgba(67, 67, 67, 0.364); color: rgb(0, 255, 128);">Lets play Sudoku:</span>
+
+        <div class="row">
+            <div class="cola" >
+                <b style="color: lightblue; font-size: 20px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;border: 10px solid rgba(224, 255, 255, 0); background-color: rgba(224, 255, 255, 0.309);">INSTRUCTIONS:</b>
+                <br><br>
+                <button style="width: 175px; height: 50px; background-color: red; border: rgb(0, 0, 0);float: left;"><b>&#10060;&nbsp;&nbsp;INCORRECT INPUT</b></button>
+                <br><br><br>
+                <button style="width: 175px; height: 50px; background-color: rgb(0, 255, 0); border: rgb(0, 0, 0);float: left;"><b>&#10004;&nbsp;&nbsp;CORRECT INPUT</b></button>
+            </div>
+
+            <div id="mydiv" class="colb">
+               
+            </div>
+        </div>
+        
+        <br><br><br>
+        <p style="color: rgb(191, 191, 191); float: left; padding: 0px; margin-bottom: 0%;"><small>Supported by <b>Mr. Bharat</b> and <b>Swanand Kadam</b></small></p>
+        <p style="color: rgb(191, 191, 191); float: right; padding: 0px; margin-bottom: 0%;"><small>Sudoku game created by <b>Karan Negi</b></small></p>
+
+        <a></a>
+
+    </body>
+</html>
+
+<script> 
+       
+    var sudoku= [[],[],[],[],[],[],[],[],[]]
+
+    function createGrid()
+        {   var mycontainer = document.getElementById('mydiv')
+
+            for (var i=0;i<9;i++)
+            {
+                for (var j=0;j<9;j++)
+                {
+                    
+                    var myinput1 = document.createElement('input')
+
+                    myinput1.id= `${i}${j}`
+
+                    var number= Math.ceil(Math.random()*9) 
+
+                    myinput1.row=i
+
+                    myinput1.col=j
+
+                        if(issafe(sudoku,i,j,number))
+                        {
+                            myinput1.value=number
+                            myinput1.readOnly=true
+                        }
+
+                        else
+                        {
+                            number=0
+                            myinput1.value=''
+                        }
+
+                        sudoku[i][j]=number
+
+                        mycontainer.appendChild(myinput1)
+
+
+                        myinput1.oninput=function(e)
+                        {                                    
+                        checkanswer(sudoku,e)
+                        }
+        
+                    }
+                }
+
+                console.log('sudoku',sudoku)
+            }
+
+                createGrid()
+
+                function issafe(grid, row, col, num)
+                {
+
+                    for(var x=0;x<9;x++)
+                    {
+                    
+                        if(grid[row][x]==num)
+                        {
+                            return false
+                        }
+
+                        for(var y=0;y<9;y++)
+                        {
+
+                            if(grid[y][col]==num)
+                                {
+                                return false
+                                }
+                        }
+
+
+                        var startrow=row-row%3
+                        var startcol=col-col%3
+
+
+                        for(var m=0;m<3;m++)
+                        {
+
+                            for(var n=0;n<3;n++)
+                            {
+                                if(grid[m+startrow][n+startcol]==num)
+                                {
+                                   return false
+                                }
+                            }
+                        }
+
+                       
+
+                    }
+
+                   return true   
+                }
+
+
+                function checkanswer(grid, e)
+                {
+                    console.log('e',e)
+
+                    var row= e.target.row
+                    var col= e.target.col
+                    var num= Number(e.data)
+                    var id= e.target.id
+
+                    if(num=='')
+                    {
+                        return false
+                    }
+
+                    
+                    for(var x=0;x<9;x++)
+                    {
+                        if(grid[row][x]==num)
+                        {
+                            showcolors('red',id)
+                            //alert('row error')
+                            return false
+                        }
+
+
+                        for(var y=0;y<9;y++)
+                        {
+                            if(grid[y][col]==num)
+                            {
+                                showcolors('red',id)
+                                //alert('col error')
+                                return false
+                            }
+                        }
+
+
+                        var startrow=row-row%3
+                        var startcol=col-col%3
+
+
+                        for(var m=0;m<3;m++)
+                        {
+                            for(var n=0;n<3;n++)
+                            {
+                                if(grid[m+startrow][n+startcol]==num)
+                                {
+                                    showcolors('red',id)
+                                    //alert('cell error')
+                                    return false
+                                }
+                            }
+                        }
+
+                       
+
+                    }
+
+                    showcolors('lime',id)
+                    return true
+
+                }
+
+                function showcolors(color,id)
+                {
+                    var inp=document.getElementById(id)
+
+                    if(color=='red')
+                    {
+                        inp.style.backgroundColor='red'
+                    }
+                    
+                    else
+                    {
+                        inp.style.backgroundColor='lime'
+                    }
+
+                }
+            
+
+                function myFunction(){
+                        return "Your data will be lose after leaving this site.";
+                    }  
+        
+</script>
