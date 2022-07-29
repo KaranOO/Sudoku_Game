@@ -9,7 +9,7 @@ You know what, lemme tell you a secret... The other day I went to gym.
 It was closed down. You know why did the GYM close down? Because it just didn't work out! :rofl:
 
 ## 🚀 About Me
-I'm a graduate student, pursuing B.Tech(CSE) from KIIT College of Engineering, Sohna Road.
+I'm a graduate student, pursuing **B.Tech(CSE)** from **KIIT College of Engineering**, Sohna Road.
 
 
 ## 🔗 Links
