@@ -27,7 +27,7 @@ I'm a graduate student, pursuing B.Tech(CSE) from KIIT College of Engineering, S
 <img alt="CSS3" width="40px" src="./image/CSS3.svg" style="padding-right:15px;" />
 <img alt="Git" width="40px" src="./image/Git.svg" style="padding-right:15px;" />
 <img alt="C" width="40px" src="./image/C.svg" style="padding-right:15px;"/>
-<img alt="Cpp" width="40px" src="./image/cplusplus.svg" style="padding-right:15px;"/>
+<img alt="Cpp" width="40px" src="./image/cpp.svg" style="padding-right:15px;"/>
 <img alt="Python" width="40px" src="./image/Python.svg"/>  
 </div>
 
